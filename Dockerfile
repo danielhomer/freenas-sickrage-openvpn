@@ -27,5 +27,27 @@ LABEL org.freenas.interactive="false" \
               \"env\": \"TZ\",                      \
               \"descr\": \"Timezone information, eg Europe/London\",    \
               \"optional\": true                    \
-          }                             \
+          }, \
+          { \
+              \"env\": \"OPENVPN_USERNAME\" \
+              \"descr\": \"OpenVPN Username\", \
+              \"optional\": false \
+          }, \
+          { \
+              \"env\": \"OPENVPN_PASSWORD\" \
+              \"descr\": \"OpenVPN Password\", \
+              \"optional\": false \
+          }, \
+          { \
+              \"env\": \"OPENVPN_PROVIDER\" \
+              \"descr\": \"OpenVPN Provider\", \
+              \"optional\": false \
+          } \
       ]"
+
+
+RUN apk add --no-cache openvpn
+
+ADD openvpn/ /etc/openvpn/
+
+CMD ["/etc/openvpn/start.sh"]
